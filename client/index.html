@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First steps in Vue</title>
+  <link href="main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container" id="app" v-cloak>
+    <h1>TO DO List</h1>
+    <form class="form-inline mb-3" @submit.prevent="addTask">
+      <div class="form-group mr-5">
+        <input type="text" class="form-control" id="text" placeholder="task" v-model="form.text">
+      </div>
+      <button type="submit" class="btn btn-primary" :disabled="!canAdd">Add</button>
+    </form>
+
+    <div v-if="loading">
+      <loader />
+    </div>
+
+    <div v-else-if="tasks.length">
+      <div class="card mt-2" v-for="task in tasks">
+        <div class="card-body">
+          <input type="text" v-if="task.isEditing" v-model="editValue" @keyup.enter="editTask(task._id)">
+          <p class="card-text" v-else :class="{'strike': task.isCompleted}">{{task.text}}</p>
+          <button class="btn btn-primary" @click="completeTask(task._id)">Complete</button>
+          <button class="btn btn-primary" @click="changeEditing(task._id)">Edit</button>
+          <button class="btn btn-danger" @click="removeTask(task._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <p v-else>There are no tasks</p>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
