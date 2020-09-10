@@ -1,6 +1,7 @@
 # ToDo_Vue_REST_API_MongoDB
 
-Here is my example of implementation of creating ToDo-list using the following instruments:
+### Here is my example of implementation of creating ToDo-list using the following instruments:
+
 - Vue (a frontend part);
 - Bootstrap (a style part);
 - Node.js/Express (a server part);
